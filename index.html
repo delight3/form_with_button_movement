@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Move Button Left and Right Within Container</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      #submitBtn {
+        width: 20%;
+        position: absolute;
+        bottom: 0;
+        left: 13%;
+        right: 13%;
+        transform: translate(-50%, -35%);
+        background-color: dodgerblue;
+        padding: 8px;
+        border: none;
+        border-radius: 5px;
+        text-align: center;
+      }
+
+      #container {
+        position: relative;
+        width: 30%; /* Adjust container width as needed */
+        height: 200px; /* Adjust container height as needed */
+        background-color: #f1f1f1;
+        margin: auto;
+        overflow: hidden; /*Ensure butto n stays within container*/
+        border-radius: 6px;
+      }
+      #container h1 {
+        text-align: center;
+        color: dodgerblue;
+      }
+
+      #container div {
+        padding: 10px;
+      }
+      #container input {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+      }
+      #container div {
+        padding: 10px;
+      }
+      @media screen and (max-width: 500px) {
+        #container {
+          width: 80%;
+          /* margin: auto; */
+        }
+        #submitBtn {
+          width: 30%;
+          bottom: 0;
+          left: 20%;
+          right: 20%;
+          font-size: 15px;
+          margin-top: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <h1>Login</h1>
+      <form action="">
+        <div>
+          <input
+            type="text"
+            name="email"
+            id="emailInput"
+            placeholder="Enter Email"
+          />
+        </div>
+        <div>
+          <input
+            type="password"
+            id="passwordInput"
+            placeholder="Enter password"
+          />
+        </div>
+        <div>
+          <button id="submitBtn" onmouseover="checkPassword()">Submit</button>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      function checkPassword() {
+        var passwordInput = document.getElementById("passwordInput");
+        var submitBtn = document.getElementById("submitBtn");
+        let emailInput = document.getElementById("emailInput");
+        var password = "correctpassword";
+        let email = "mail@mail.com";
+
+        if (passwordInput.value !== password || emailInput.value !== email) {
+          moveButton();
+          passwordInput.value = ""; // Clear input field on wrong password
+          emailInput.value = "";
+        } else if (
+          passwordInput.value === password ||
+          emailInput.value === email
+        ) {
+          submitBtn.onclick = function () {
+            alert("login successful");
+          };
+        }
+      }
+
+      function moveButton() {
+        var submitBtn = document.getElementById("submitBtn");
+        var containerWidth = document.getElementById("container").offsetWidth;
+        var x = Math.random() * containerWidth;
+        submitBtn.style.left = x + "px";
+      }
+    </script>
+  </body>
+</html>
